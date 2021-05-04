@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  svelte:
+    image: anfangd/svelte:dev
+    build:
+      context: ./svelte
+    container_name: svelte-container
+    environment:
+      - TZ=JST-9
+    volumes:
+      - type: bind
+        source: ../../
+        target: /home/workspace/svelte
+    networks:
+      - svelte
+    ports:
+      - "5000:5000"
+      - "3000:3000"
+    working_dir: /home/workspace/svelte
+    tty: true
+
+networks:
+  svelte:
+    external: false
+    name: svelte
